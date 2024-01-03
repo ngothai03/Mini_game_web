@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Làm giàu không khó</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Tài Xỉu</h1>
+      <h2>
+        Bạn cứ tin tưởng vào vận may của bản thân. Việc làm giàu để chúng tôi
+        lo!
+      </h2>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Số tiền của bạn</h2>
+        <h2>{{ money }}</h2>
+      </section>
+      <section>
+        <image :src="dice1Image"></image>
+        <image :src="dice2Image"></image>
+        <image :src="dice3Image"></image>
+      </section>
+      <section id="player" class="container" v-if="betting">
+        <h2>Đặt cược</h2>
+        <form>
+          <label for="fname">Số tiền:</label><br />
+          <input type="text" id="fname" name="fname" v-model="betMoney" /><br />
+          <fieldset>
+            <legend>Chọn cược: {{picked}}</legend>
+            <input type="radio" id="one" value="Tài" v-model="picked" />
+            <label for="one">Tài</label>
+
+            <input type="radio" id="two" value="Xỉu" v-model="picked" />
+            <label for="two">Xỉu</label>
+          </fieldset>
+        </form>
+        <button @click="rollDice()">CHẤP NHẬN</button>
+        <button @click="cancelBet()">HỦY BỎ</button>
+        <p v-if="outOfMoney">Ít tiền thì đừng bày đặt cược bạn nhé :))))</p>
+      </section>
+      <section id="controls">
+        <button @click="startBet()">ĐẶT CƯỢC</button>
+        <button @click="allIn()">ALL IN</button>
+        <button @click="makeMoney()">NẠP TIỀN</button>
+        <button>RÚT TIỀN</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Kết quả cược</h2>
+        <p>{{result}}</p>
+      </section>
+    </div>
+  </body>
+</html>
